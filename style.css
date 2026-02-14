@@ -1,0 +1,150 @@
+:root {
+    --primary-red: #ff0033;
+    --bg-color: #ffe6eb;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    /* Fondo con patrón de corazones sutiles */
+    background-image: url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 39.7l-1.4-1.3C13.5 29.2 7 23.3 7 16c0-6 4.8-10.8 10.8-10.8 3.4 0 6.6 1.6 8.2 4.1 1.6-2.5 4.8-4.1 8.2-4.1 6 0 10.8 4.8 10.8 10.8 0 7.3-6.5 13.2-16.6 22.4L25 39.7z' fill='%23ffb3c6' fill-opacity='0.4'/%3E%3C/svg%3E");
+    font-family: 'Poppins', sans-serif; /* Tipografía más moderna y grande */
+    overflow: hidden; 
+}
+
+/* Contenedor flotante de corazones (detrás de la tarjeta) */
+#background-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(255, 0, 50, 0.2);
+    text-align: center;
+    max-width: 90%;
+    width: 550px;
+    position: relative;
+    z-index: 1; /* Esto mantiene la tarjeta sobre los corazones flotantes */
+}
+
+/* Estilos de Tipografía y Tamaños */
+.message {
+    margin-bottom: 30px;
+    font-size: 1.4em; /* Letras más grandes */
+    line-height: 1.6;
+    color: #4a0010;
+}
+
+.title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5em; /* Título muy grande y romántico */
+    color: var(--primary-red);
+    margin-bottom: 15px;
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2em;
+    color: var(--primary-red);
+    font-weight: bold;
+}
+
+/* Diseño y Animación del Corazón Gigante */
+.heart-container {
+    position: relative;
+    width: 100%;
+    height: 180px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.big-heart {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    background-color: var(--primary-red);
+    transform: rotate(-45deg);
+    /* Animación de latido (heartbeat) */
+    animation: heartbeat 1.2s infinite;
+    box-shadow: 0 0 40px rgba(255, 0, 51, 0.6); /* Brillo rojo */
+}
+
+.big-heart::before,
+.big-heart::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-color: var(--primary-red);
+    border-radius: 50%;
+}
+
+.big-heart::before { top: -60px; left: 0; }
+.big-heart::after { top: 0; left: 60px; }
+
+@keyframes heartbeat {
+    0% { transform: rotate(-45deg) scale(1); }
+    14% { transform: rotate(-45deg) scale(1.2); }
+    28% { transform: rotate(-45deg) scale(1); }
+    42% { transform: rotate(-45deg) scale(1.2); }
+    70% { transform: rotate(-45deg) scale(1); }
+}
+
+/* Estilos del reloj */
+.timer {
+    margin-top: 20px;
+    font-size: 1.3em; /* Reloj más grande */
+    font-weight: 600;
+    color: #d60029;
+    background: #fff0f3;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px dashed #ffb3c6;
+}
+
+#time-elapsed {
+    font-size: 1.2em;
+    color: var(--primary-red);
+}
+
+/* Corazones flotantes animados en toda la pantalla */
+.floating-heart {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    transform: rotate(-45deg);
+    opacity: 0.7;
+    animation: floatUp linear infinite;
+}
+.floating-heart::before,
+.floating-heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: inherit; /* Hereda el color que le daremos en JS */
+    border-radius: 50%;
+}
+.floating-heart::before { top: -7.5px; left: 0; }
+.floating-heart::after { top: 0; left: 7.5px; }
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(-45deg) scale(0.5); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) rotate(-45deg) scale(1.5); opacity: 0; }
+}
